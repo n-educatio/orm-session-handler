@@ -1,0 +1,24 @@
+{
+    "name": "neducatio/orm-session-handler",
+    "authors": [
+        {
+            "name": "Jakub Biernacki",
+            "email": "kbiernacki@n-educatio.pl"
+        }
+    ],
+    "require" : {
+        "symfony/framework-bundle": "~2.3",
+        "doctrine/orm": "~2.2",
+        "doctrine/doctrine-bundle": "~1.2"        
+    },
+    "require-dev": {
+        "mockery/mockery": "~0.9",
+        "phpunit/phpunit": "4.1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Neducatio": "src"
+        }
+    },
+    "minimum-stability": "stable"
+}

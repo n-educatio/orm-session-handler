@@ -1,0 +1,14 @@
+parameters:
+    neducatio_ormsessionhandler.repository_session.class: Neducatio\ORMSessionHandlerBundle\Model\Session;
+    neducatio_ormsessionhandler.httpfoundation_session_storage_handler.class: Neducatio\ORMSessionHandlerBundle\HttpFoundation\Session\Storage\Handler\ORMSessionHandler;
+    
+services:          
+    neducatio_ormsessionhandler.httpfoundation_session_storage_handler:
+        class: %neducatio_ormsessionhandler.httpfoundation_session_storage_handler.class%
+        arguments: [@neducatio_ormsessionhandler.repository_session]
+           
+    neducatio_ormsessionhandler.repository_session:
+        class: %neducatio_ormsessionhandler.repository_session.class%
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository        
+        private: true
