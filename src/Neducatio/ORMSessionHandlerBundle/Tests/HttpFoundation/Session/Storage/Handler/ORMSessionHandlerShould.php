@@ -122,7 +122,7 @@ class ORMSessionHandlerShould extends \PHPUnit_Framework_TestCase
         $this->sessionRepositoryExpectsSaveMethodCall($sessionEntity);
         $this->sessionWriterExpectsWriteMethodCall($sessionEntity);
 
-        $this->assertTrue($this->ORMSessionHandler->write(self::SESSION_ID, $this->sessionData));
+        $this->assertTrue($this->ORMSessionHandler->write(self::SESSION_ID, serialize($this->sessionData)));
     }
 
     /**
@@ -161,7 +161,7 @@ class ORMSessionHandlerShould extends \PHPUnit_Framework_TestCase
 
     private function sessionWriterExpectsWriteMethodCall($sessionEntity)
     {
-        $this->sessionWriter->shouldReceive('write')->with(self::SESSION_ID, $this->sessionData, $sessionEntity)->once()->andReturn($sessionEntity);
+        $this->sessionWriter->shouldReceive('write')->with(self::SESSION_ID, serialize($this->sessionData), $sessionEntity)->once()->andReturn($sessionEntity);
     }
 
     private function sessionRepositoryExpectsSaveMethodCall($sessionEntity)

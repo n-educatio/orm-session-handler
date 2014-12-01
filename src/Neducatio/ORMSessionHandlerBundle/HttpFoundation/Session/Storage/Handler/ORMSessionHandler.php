@@ -72,7 +72,9 @@ class ORMSessionHandler implements \SessionHandlerInterface
      */
     public function read($sessionId)
     {
-        return $this->sessionRepository->get($sessionId)->getData();
+        $sessionEntity = $this->sessionRepository->get($sessionId);
+
+        return is_null($sessionEntity) ? null : $sessionEntity->getData();
     }
 
     /**
@@ -80,9 +82,9 @@ class ORMSessionHandler implements \SessionHandlerInterface
      */
     public function write($sessionId, $data)
     {
-        $sessionEntity = $this->sessionRepository->get($sessionId);
-
-        $this->sessionRepository->save($this->sessionWriter->write($sessionId, $data, $sessionEntity));
+        $sessionEntity = $this->sessionWriter->write($sessionId, $data, $this->sessionRepository->get($sessionId));
+        $sessionEntity->setData($data);
+        $this->sessionRepository->save($sessionEntity);
 
         return true;
     }
