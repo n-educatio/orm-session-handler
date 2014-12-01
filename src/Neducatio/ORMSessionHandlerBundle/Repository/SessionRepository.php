@@ -2,6 +2,7 @@
 namespace Neducatio\ORMSessionHandlerBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Neducatio\ORMSessionHandlerBundle\Model\Session as SessionEntity;
 
 /**
  * SessionRepository
@@ -20,6 +21,17 @@ class SessionRepository extends EntityRepository
     public function get($sessionId)
     {
         return $this->find($sessionId);
+    }
+
+    /**
+     * Save session entity
+     *
+     * @param SessionEntity $sessionEntity session entity
+     */
+    public function save(SessionEntity $sessionEntity)
+    {
+        $this->_em->persist($sessionEntity);
+        $this->_em->flush($sessionEntity);
     }
 
     /**
