@@ -29,6 +29,10 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
+                ->scalarNode('maxlifetime')
+                    ->defaultValue(72000)
+                    ->cannotBeEmpty()
+                ->end()
             ->end();
 
         return $treeBuilder;

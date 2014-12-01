@@ -25,9 +25,7 @@ class NeducatioORMSessionHandlerExtension extends Extension
         $loader->load('services.yml');
 
         $container->getDefinition('neducatio_ormsessionhandler.repository_session')->addArgument($processedConfiguration['class']);
-        $container->getDefinition('neducatio_ormsessionhandler.httpfoundation_session_storage_handler')->addArgument($processedConfiguration['writer']);
-
-
-
+        $container->getDefinition('neducatio_ormsessionhandler.httpfoundation_session_storage_handler')->addArgument(new Reference($processedConfiguration['writer']));
+        $container->getDefinition('neducatio_ormsessionhandler.command_destroyoutdatedsessions')->addArgument($processedConfiguration['maxlifetime']);
     }
 }
